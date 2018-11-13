@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css">
+
+</head>
+<header>
+	<nav class="navbar navbar-dark justify-content-between fixed-top">
+		<div class="navbar-brand link" style="height: 30px">
+				<label>Bi</label>
+
+		</div>
+		<form class="form-inline">
+			<div class="nav2" style="height: 38px;">
+			    <button class="btn"><a href="login">LOGIN</a></button>
+			</div>
+		</form>
+	</nav>
+</header>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4" id="left_R">
+				
+			</div>
+			<div class="col-md-4" id="mid_R" style="margin-top: 32px">
+				<h2>REGISTER</h2>
+				 <form>
+				  <div class="form-group">
+				    <label for="username">Username </label>
+						<input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+						<p id="msg" ></p>
+				  </div>
+				  <div class="form-group">
+				    <label for="email">Email</label>
+				    <input type="email" name="email" placeholder="Email" class="form-control" id="email" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="pass">Password </label>
+				    <input type="password" name="pass" class="form-control" placeholder="Password" id="pass" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="date">Date of birth </label>
+				    <input type="date" name="ttl" class="form-control" id="ttl" required>
+				  </div>
+				  <div class="form-group"> 
+			 	  	
+				  </div>
+					<div class="row">
+						<div class="col-md-4">
+					  	</div>
+					  	<div class="col-md-4">
+							 <div class="text-center"><button id="btn" class="btn btn-primary btn-md">Register</button></div>  
+					  	</div>
+					  	<div class="col-md-4">					  		
+					  	</div>						
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4" id="right_R">				
+			</div>			
+		</div>
+	</div>
+
+
+
+
+<script>
+	$(document).ready(function(){
+		$('#btn').on('click', function(e){
+			//console.log('halo');
+			$.ajax({
+				url: '/regis',
+				method : 'POST',
+				data : {
+					username : document.getElementById('username').value,
+					email : document.getElementById('email').value,
+					pass : document.getElementById('pass').value,
+					date : document.getElementById('ttl').value
+				},
+				statusCode: {
+					200: function() {
+						//alert("Berhasil Registrasi");
+						window.location.replace('/login')
+					},
+					400: function() {
+						$('#msg').text('Username/Email sudah dipakai')			
+					}
+				}
+			});
+		 e.preventDefault();
+		});
+	});
+</script>
+</body>
+</html>

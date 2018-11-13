@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css">
+
+</head>
+<header>
+	<nav class="navbar navbar-dark justify-content-between fixed-top">
+		<div class="navbar-brand link" style="height: 30px">
+				<label>Bi</label>
+
+		</div>
+		<form class="form-inline">
+			<div class="nav2" style="height: 38px;">
+			    <button class="btn"><a href="register">REGISTER</a></button>
+			</div>
+		</form>
+	</nav>
+</header>
+
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4" id="left_L">		
+			</div>
+			<div class="col-md-4" id="mid_L" style="margin-top: 32px">
+				<h2>LOGIN</h2>
+				<!-- <form style="margin-top: 48px" method="POST" action="/loginUser"> -->
+					<div class="form-group">
+					    <label for="username">Username</label>
+					    <input type="text" class="form-control" id="username"  placeholder="Username">
+					</div>
+					<div class="form-group">
+						<label for="pass">Password </label>
+					    <input type="password" placeholder="Password" class="form-control"  id="pass">
+					</div>
+					<div>
+						<div class="col-md-10">
+					 	  	<div class="form-check">
+							    <label class="form-check-label">
+							      <input class="form-check-input" type="checkbox">Remember me
+							    </label>
+						  	</div>
+				 	  		
+				 	  	</div>
+				 	  	<div class="col-md-1">
+				 	  	</div>
+				 	  	<div class="col-md-1">
+				 	  		
+				 	  	</div>
+							
+					</div>
+				    <div class="row">
+				        <div class="col-md-4">
+				            
+				        </div>
+				        <div class="col-md-4">
+				        	  <div class="text-center"><button class="btn btn-primary btn-md" id="login">Login</button></div>    
+				        </div>
+				        <div class="col-md-4">
+				            
+				        </div>
+				    </div>
+				<!-- </form> -->
+			</div>
+			<div class="col-md-4" id="right_L">
+				
+			</div>
+		</div>
+	</div>
+
+
+	
+	<!-- <form action="/upload" method="POST" enctype="multipart/form-data">
+		<div>
+			<label>Nama :</label> <input type="text" name="nama">
+			<br>
+			<label>file.pdf</label>	<input type="file" name="file"> <br>
+			<input type="submit">
+		</div>
+	</form>
+ -->
+
+
+ <script>
+ $(document).ready(function(){
+	 $('#login').on('click', function(e){
+		 
+		 $.ajax({
+			 url : '/loginUser',
+			 method : "POST",
+			 data : {
+				 username : document.getElementById('username').value,
+				 pass : document.getElementById('pass').value
+			 },
+			 statusCode : {
+				 200: function(){
+					window.location.replace('/profile/login/' + document.getElementById('username').value)
+				 },
+				 400: function(){
+					alert('Username/Password salah')
+				 }
+			 }
+		 })
+	 })
+ 
+ })
+
+ </script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Forum Bi</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<header>
+	<nav class="navbar navbar-dark justify-content-between fixed-top">
+		<div class="navbar-brand link" style="height: 30px">
+				<label>Bi</label>
+				<a href="#">Home</a>
+				<a href="#">About</a>
+		</div>
+		<form class="form-inline">
+			<input class="form-control" type="search" id="s" placeholder="Search" />
+			<input type="submit" class="btn" id="cari" value="Search" />	
+		</form>
+		<form class="form-inline nav1">
+			    <span><a href="home"><img src="/assets/img/logout.png"></a></span>		
+		</form>
+	</nav>
+</header>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-3" id="side" >
+				<div class="text-center">	
+				<img src="/assets/img/112829-200.png"><br>
+				</div>
+				<h5><a href="#" id="nama" class="nama"> <%= user.username %> </a></h5><br>
+				<input id="username" type="text" style="display:none" value="<%= user.username %>">
+				<input id="userid" type="text" style="display:none" value="<%= user.id %>"> 
+				<div class="konten">
+					<div class="text-center">
+						<div class="form-inline" style="margin-bottom: 24px;">	
+							<input type="form" class="form-control" id="namaForum" placeholder="Tambah Diskusi">
+							<input id="submit" onclick="add()" type="submit" name="Add_forum" class="btn" style="margin-left: auto; " data-toggle="modal" data-target="#myModal">
+						</div>
+					</div>
+					<p><a href="#">Forum Diskusi 1</a></p>
+					<p><a href="#">Forum Diskusi 2</a></p>
+					<p><a href="#">Forum Diskusi 3</a></p>
+					<p><a href="#">Forum Diskusi 4</a></p>
+					<p><a href="#">Forum Diskusi 5</a></p>
+					<p><a href="#">Forum Diskusi 6</a></p>
+					<p><a href="#">Forum Diskusi 7</a></p>
+					<div class="text-center">
+					<button class="btn" onclick="show()">Show More</button>
+					</div>
+					<div class="hide">  
+					<p><a href="#">Forum Diskusi 9</a></p>
+					<p><a href="#">Forum Diskusi 10</a></p>
+					<p><a href="#">Forum Diskusi 11</a></p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-md-3 bg1">
+			</div>
+			<!-- The Modal -->
+			<div class="modal" id="myModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title" id="title"></h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			      <!-- Modal body -->
+			      <div class="modal-body">
+					
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" name="radio" class="form-check-input" value="1"name="optradio">Private
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<label class="form-check-label">
+							<input type="radio" name="radio" class="form-check-input" value="2"  name="optradio">Public
+						</label>
+					</div>
+					<br>
+					<br>
+					<textarea id="body">
+						
+					</textarea>
+					<input type="range">
+				</div>
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+							
+							<button type="button" id="add" class="btn btn-success" data-dismiss="modal">Add</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="col-md-9 bg1">
+
+				<% message.forEach(function(message){ %>					
+						<%		if (!message.status){ %>
+									<h2 class="title1"><a href=""> <%= message.msg_title %> </a></h2> 
+									<br> 
+									<div class="card bg-light"> 
+											<div class="card-header "><a href="#"> <%= message.name %> </a><br/><i>Time <span style="margin-left : 10px"><%= message.date %></span></i></div> 
+									<div class="card-body"> <%= message.msg_body %> </div>  
+										<div class="card-footer"><a href=""><span class="fa fa-comment-o" id="like"></span></a></div> 
+									</div> 								
+							<%	} %>
+					<% }) %>
+				</div>
+		</div>	
+	</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+	
+
+	function add(){
+		var a = document.getElementById("namaForum").value; 
+		document.getElementById("title").innerHTML = a;
+	}
+		
+	$(document).ready(function(){
+		
+		$("#add").on('click', function(){
+			var radioValue = $("input[name='radio']:checked").val();
+			arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+			date = new Date();
+			millisecond = date.getMilliseconds();
+			detik = date.getSeconds();
+			menit = date.getMinutes();
+			jam = date.getHours();
+			hari = date.getDay();
+			tanggal = date.getDate();
+			bulan = date.getMonth();
+			tahun = date.getFullYear();
+			if (menit < 10 && menit != 0){
+				menit = "0"+menit;
+			}
+			if (jam < 10 && menit != 0){
+				jam = "0"+jam;
+			}
+			var waktu = jam+" : "+menit+", "+tanggal+"-"+arrbulan[bulan]+"-"+tahun;
+			
+			$.ajax({
+				url : '/addMsg',
+				method : 'POST',
+				data : {
+					name : document.getElementById('username').value,
+					id : document.getElementById('userid').value,
+					title : document.getElementById("namaForum").value,
+					body : document.getElementById('body').value,
+					type :  radioValue,
+					date : waktu
+				},
+				timeout : 2000,
+				statusCode : {
+					200: function(){
+						alert('berhasil')
+				 },
+				 	400: function(){
+						alert('Username/Password salah')
+				 }
+				}
+			})
+		})
+	})
+
+</script>
